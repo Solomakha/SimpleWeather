@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		7C4C61FA2CA833F700E51B8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C61F92CA833F700E51B8F /* AppDelegate.swift */; };
-		7C4C61FC2CA833F700E51B8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C61FB2CA833F700E51B8F /* SceneDelegate.swift */; };
-		7C4C61FE2CA833F700E51B8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C61FD2CA833F700E51B8F /* ViewController.swift */; };
-		7C4C62012CA833F700E51B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C4C61FF2CA833F700E51B8F /* Main.storyboard */; };
 		7C4C62042CA833F700E51B8F /* SimpleWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C62022CA833F700E51B8F /* SimpleWeather.xcdatamodeld */; };
 		7C4C62062CA833FA00E51B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C4C62052CA833FA00E51B8F /* Assets.xcassets */; };
 		7C4C62092CA833FA00E51B8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C4C62072CA833FA00E51B8F /* LaunchScreen.storyboard */; };
 		7C4C62142CA833FB00E51B8F /* SimpleWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C62132CA833FB00E51B8F /* SimpleWeatherTests.swift */; };
 		7C4C621E2CA833FB00E51B8F /* SimpleWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C621D2CA833FB00E51B8F /* SimpleWeatherUITests.swift */; };
 		7C4C62202CA833FB00E51B8F /* SimpleWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C621F2CA833FB00E51B8F /* SimpleWeatherUITestsLaunchTests.swift */; };
+		7C4C622D2CA843EA00E51B8F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C622C2CA843EA00E51B8F /* Coordinator.swift */; };
+		7C4C622F2CA8453100E51B8F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C622E2CA8453100E51B8F /* AppCoordinator.swift */; };
+		7C4C62312CA8561000E51B8F /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C62302CA8561000E51B8F /* MainScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +39,6 @@
 /* Begin PBXFileReference section */
 		7C4C61F62CA833F700E51B8F /* SimpleWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C4C61F92CA833F700E51B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7C4C61FB2CA833F700E51B8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7C4C61FD2CA833F700E51B8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7C4C62002CA833F700E51B8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C4C62032CA833F700E51B8F /* SimpleWeather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleWeather.xcdatamodel; sourceTree = "<group>"; };
 		7C4C62052CA833FA00E51B8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C4C62082CA833FA00E51B8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +48,9 @@
 		7C4C62192CA833FB00E51B8F /* SimpleWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C4C621D2CA833FB00E51B8F /* SimpleWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeatherUITests.swift; sourceTree = "<group>"; };
 		7C4C621F2CA833FB00E51B8F /* SimpleWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7C4C622C2CA843EA00E51B8F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		7C4C622E2CA8453100E51B8F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		7C4C62302CA8561000E51B8F /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +101,9 @@
 		7C4C61F82CA833F700E51B8F /* SimpleWeather */ = {
 			isa = PBXGroup;
 			children = (
+				7C4C62332CA8568700E51B8F /* ViewControllers */,
+				7C4C62322CA8564900E51B8F /* Coordinators */,
 				7C4C61F92CA833F700E51B8F /* AppDelegate.swift */,
-				7C4C61FB2CA833F700E51B8F /* SceneDelegate.swift */,
-				7C4C61FD2CA833F700E51B8F /* ViewController.swift */,
-				7C4C61FF2CA833F700E51B8F /* Main.storyboard */,
 				7C4C62052CA833FA00E51B8F /* Assets.xcassets */,
 				7C4C62072CA833FA00E51B8F /* LaunchScreen.storyboard */,
 				7C4C620A2CA833FA00E51B8F /* Info.plist */,
@@ -128,6 +127,23 @@
 				7C4C621F2CA833FB00E51B8F /* SimpleWeatherUITestsLaunchTests.swift */,
 			);
 			path = SimpleWeatherUITests;
+			sourceTree = "<group>";
+		};
+		7C4C62322CA8564900E51B8F /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				7C4C622C2CA843EA00E51B8F /* Coordinator.swift */,
+				7C4C622E2CA8453100E51B8F /* AppCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		7C4C62332CA8568700E51B8F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7C4C62302CA8561000E51B8F /* MainScreenViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +252,6 @@
 			files = (
 				7C4C62092CA833FA00E51B8F /* LaunchScreen.storyboard in Resources */,
 				7C4C62062CA833FA00E51B8F /* Assets.xcassets in Resources */,
-				7C4C62012CA833F700E51B8F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4C622F2CA8453100E51B8F /* AppCoordinator.swift in Sources */,
 				7C4C62042CA833F700E51B8F /* SimpleWeather.xcdatamodeld in Sources */,
-				7C4C61FE2CA833F700E51B8F /* ViewController.swift in Sources */,
+				7C4C622D2CA843EA00E51B8F /* Coordinator.swift in Sources */,
 				7C4C61FA2CA833F700E51B8F /* AppDelegate.swift in Sources */,
-				7C4C61FC2CA833F700E51B8F /* SceneDelegate.swift in Sources */,
+				7C4C62312CA8561000E51B8F /* MainScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +317,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7C4C61FF2CA833F700E51B8F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C4C62002CA833F700E51B8F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7C4C62072CA833FA00E51B8F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -372,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -429,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -449,11 +457,12 @@
 				DEVELOPMENT_TEAM = ZTBSRNSWGH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SimpleWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Simple Weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,11 +486,12 @@
 				DEVELOPMENT_TEAM = ZTBSRNSWGH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SimpleWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Simple Weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
