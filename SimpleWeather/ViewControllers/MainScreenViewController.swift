@@ -30,6 +30,9 @@ class MainScreenViewController: UIViewController {
         view.addSubview(weatherImgView)
         view.addSubview(weatherMeaningLabel)
         
+        view.addSubview(weatherGraphView)
+        view.addSubview(segmentedControl)
+        
         setupView()
         addConstraints()
         setCustomLabelText()
@@ -71,7 +74,21 @@ class MainScreenViewController: UIViewController {
             weatherValueLabel.topAnchor.constraint(equalTo: weatherImgView.bottomAnchor, constant: 20),
             
             weatherMeaningLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            weatherMeaningLabel.topAnchor.constraint(equalTo: weatherValueLabel.bottomAnchor, constant: 10)
+            weatherMeaningLabel.topAnchor.constraint(equalTo: weatherValueLabel.bottomAnchor, constant: 10),
+            
+            weatherGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherGraphView.topAnchor.constraint(equalTo: weatherMeaningLabel.bottomAnchor, constant: 10),
+            weatherGraphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            weatherGraphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            weatherGraphView.heightAnchor.constraint(equalToConstant: 200),
+            
+            segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            segmentedControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 40),
+            segmentedControl.widthAnchor.constraint(equalToConstant: 350)
+        
         ])
     }
     
@@ -119,6 +136,24 @@ class MainScreenViewController: UIViewController {
         view.contentMode = .center
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(locationLabel)
+        return view
+    }()
+    
+    private lazy var segmentedControl: UISegmentedControl = {
+        let item = ["Сьогодні","Завтра","Тиждень"]
+        let control = UISegmentedControl(items: item)
+        control.selectedSegmentIndex = 0
+        control.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
+    
+    private lazy var weatherGraphView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray.withAlphaComponent(0.2)
+        view.layer.cornerRadius = 20
+        view.contentMode = .center
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
