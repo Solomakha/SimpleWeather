@@ -12,9 +12,7 @@ class MainScreenViewController: UIViewController {
     
     var locationLabel = UILabel()
     
-    var weatherString: String = String()
     var weatherValue: String = String()
-    
     var weatherImage: UIImage = UIImage()
     
     override func viewDidLoad() {
@@ -26,7 +24,7 @@ class MainScreenViewController: UIViewController {
         locationLabel.font = UIFont.systemFont(ofSize: 20)
         
         view.addSubview(locationView)
-        view.addSubview(weatherValueLabel)
+        view.addSubview(temperatureLabel)
         view.addSubview(weatherImgView)
         view.addSubview(weatherMeaningLabel)
         
@@ -41,14 +39,6 @@ class MainScreenViewController: UIViewController {
     func setupView(){
         self.view.backgroundColor = .white
         
-        let stByUkr = UILabel()
-        stByUkr.text = "Зроблено в 🇺🇦"
-        stByUkr.textAlignment = .center
-        stByUkr.textColor = .gray
-        stByUkr.translatesAutoresizingMaskIntoConstraints = false
-        
-        let leftLabelItem = UIBarButtonItem(customView: stByUkr)
-        self.navigationItem.leftBarButtonItem = leftLabelItem
         let rightButtonItem = UIBarButtonItem(customView: addCityButton)
         self.navigationItem.rightBarButtonItem = rightButtonItem
     }
@@ -70,11 +60,11 @@ class MainScreenViewController: UIViewController {
             weatherImgView.widthAnchor.constraint(equalToConstant: 150),
             weatherImgView.heightAnchor.constraint(equalToConstant: 150),
             
-            weatherValueLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            weatherValueLabel.topAnchor.constraint(equalTo: weatherImgView.bottomAnchor, constant: 20),
+            temperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            temperatureLabel.topAnchor.constraint(equalTo: weatherImgView.bottomAnchor, constant: 20),
             
             weatherMeaningLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            weatherMeaningLabel.topAnchor.constraint(equalTo: weatherValueLabel.bottomAnchor, constant: 10),
+            weatherMeaningLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10),
             
             weatherGraphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             weatherGraphView.topAnchor.constraint(equalTo: weatherMeaningLabel.bottomAnchor, constant: 10),
@@ -113,7 +103,7 @@ class MainScreenViewController: UIViewController {
         return weatherImg
     }()
     
-    private lazy var weatherValueLabel: UILabel = {
+    private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -164,11 +154,12 @@ class MainScreenViewController: UIViewController {
             .foregroundColor: UIColor.black
         ]
         
+        var weatherString: String = String()
         weatherValue = "25"
         weatherString = String("\(weatherValue) °C")
         
         let attributedString = NSAttributedString(string: weatherString, attributes: textAttributes)
-        weatherValueLabel.attributedText = attributedString
+        temperatureLabel.attributedText = attributedString
     }
     
     @objc func addTapped() {

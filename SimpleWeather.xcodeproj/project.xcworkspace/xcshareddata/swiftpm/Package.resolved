@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "e16d3481f5ed35f0472cb93350085853d754913f",
+        "version" : "5.10.1"
+      }
+    },
+    {
+      "identity" : "flagandcountrycode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/FlagAndCountryCode.git",
+      "state" : {
+        "revision" : "1a7d7efa11bc1a73aec119acf0c3d902c62cdca6",
+        "version" : "1.1.2"
+      }
+    }
+  ],
+  "version" : 2
+}
