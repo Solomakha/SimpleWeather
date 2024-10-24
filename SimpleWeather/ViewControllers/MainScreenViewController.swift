@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainScreenViewController: UIViewController {
     weak var coordinator:AppCoordinator?
@@ -14,6 +15,8 @@ class MainScreenViewController: UIViewController {
     
     var weatherValue: String = String()
     var weatherImage: UIImage = UIImage()
+    
+    let weatherService = WeatherService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,8 @@ class MainScreenViewController: UIViewController {
         setupView()
         addConstraints()
         setCustomLabelText()
+        
+        fetchWeather(for: "Kharkiv")
     }
     
     func setupView(){
@@ -165,5 +170,80 @@ class MainScreenViewController: UIViewController {
     @objc func addTapped() {
         print("add tapped")
     }
+    
+    //Структура для запиту на сервер
+    struct WeatherResponse: Decodable {
+        let main: Main
+        let weather: [Weather]
+        
+        struct Main: Decodable {
+            let temp: Double
+            let humidity: Int
+        }
+        
+        struct Weather: Decodable {
+            let description: String
+            let icon: String
+        }
+    }
+    
+    //Мережевий запит
+    class WeatherService {
+        let apiKey = "c5879221935c6f2584c803c06084ccc1"  // Замените на ваш API-ключ
+        let baseURL = "https://api.openweathermap.org/data/2.5/weather"
+        
+        func getWeather(for city: String, completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
+            let parameters: [String: String] = [
+                "q": city,
+                "appid": apiKey,
+                "units": "metric"
+            ]
+            
+            AF.request(baseURL, parameters: parameters).responseDecodable(of: WeatherResponse.self) { response in
+                switch response.result {
+                case .success(let weatherResponse):
+                    completion(.success(weatherResponse))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    //Обробка отриманої відповіді
+    func fetchWeather(for city: String) {
+        weatherService.getWeather(for: city) { [weak self] result in
+            switch result {
+            case .success(let weatherResponse):
+                DispatchQueue.main.async {
+                    self?.updateUI(with: weatherResponse)
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    //Оновлення елементів інтерфейсу користувача
+    func updateUI(with weather: WeatherResponse){
+        temperatureLabel.text = "\(weather.main.temp) °C"
+        weatherMeaningLabel.text = weather.weather.first?.description.capitalized
+        
+        if let icon = weather.weather.first?.icon {
+            let iconURL = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+            loadImage(from: iconURL)
+        }
+    }
+    
+    //Функція завантаження зображення
+    func loadImage(from urlString: String){
+        guard let url = URL(string: urlString) else {return}
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url), let image = UIImage(data: data){
+                DispatchQueue.main.async {
+                    self.weatherImgView.image = image
+                }
+            }
+        }
+    }
 }
-
