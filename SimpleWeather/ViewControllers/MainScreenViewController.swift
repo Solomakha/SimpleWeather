@@ -39,6 +39,9 @@ class MainScreenViewController: UIViewController {
         setCustomLabelText()
         
         fetchWeather(for: "Kharkiv")
+        // Добавляем целевое действие для изменения индекса
+        segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+        
     }
     
     func setupView(){
@@ -246,4 +249,19 @@ class MainScreenViewController: UIViewController {
             }
         }
     }
+    
+    //Функція для зміни стану weatherGraphView
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+            switch segmentedControl.selectedSegmentIndex {
+            case 0:
+                weatherGraphView.backgroundColor = .black
+            case 1:
+                weatherGraphView.backgroundColor = .blue
+            case 2:
+                weatherGraphView.backgroundColor = .green
+            default:
+                weatherGraphView.backgroundColor = .gray
+            }
+        }
+    
 }
