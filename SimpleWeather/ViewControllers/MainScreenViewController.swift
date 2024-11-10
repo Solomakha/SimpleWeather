@@ -6,7 +6,10 @@
 //
 
 import UIKit
-import Alamofire
+
+public let apiKey = "c5879221935c6f2584c803c06084ccc1"  // Замените на ваш API-ключ
+public let baseURL = "https://api.openweathermap.org/data/2.5/"
+public var city = "Kharkiv"
 
 class MainScreenViewController: UIViewController {
     weak var coordinator:AppCoordinator?
@@ -21,7 +24,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationLabel.text = "м.Харків"
+        locationLabel.text = city
         locationLabel.textAlignment = .center
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.font = UIFont.systemFont(ofSize: 20)
@@ -38,7 +41,7 @@ class MainScreenViewController: UIViewController {
         addConstraints()
         setCustomLabelText()
         
-        fetchWeather(for: "Kharkiv")
+        fetchWeather(for: city)
         // Добавляем целевое действие для изменения индекса
         segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         
@@ -92,7 +95,7 @@ class MainScreenViewController: UIViewController {
     
     private lazy var addCityButton: UIButton = {
         let addCity = UIButton()
-        addCity.setTitle("Додати місто", for: .normal)
+        addCity.setTitle("Add city", for: .normal)
         addCity.setTitleColor(.gray, for: .normal)
         addCity.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         addCity.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
@@ -120,7 +123,7 @@ class MainScreenViewController: UIViewController {
     
     private lazy var weatherMeaningLabel = {
         let label = UILabel()
-        label.text = "Ясно"
+        label.text = "Sunny"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +141,7 @@ class MainScreenViewController: UIViewController {
     }()
     
     private lazy var segmentedControl: UISegmentedControl = {
-        let item = ["Сьогодні","Завтра","Тиждень"]
+        let item = ["Today","Tomorrow","Week"]
         let control = UISegmentedControl(items: item)
         control.selectedSegmentIndex = 0
         control.backgroundColor = .lightGray.withAlphaComponent(0.1)
@@ -172,45 +175,6 @@ class MainScreenViewController: UIViewController {
     
     @objc func addTapped() {
         print("add tapped")
-    }
-    
-    //Структура для запиту на сервер
-    struct WeatherResponse: Decodable {
-        let main: Main
-        let weather: [Weather]
-        
-        struct Main: Decodable {
-            let temp: Double
-            let humidity: Int
-        }
-        
-        struct Weather: Decodable {
-            let description: String
-            let icon: String
-        }
-    }
-    
-    //Мережевий запит
-    class WeatherService {
-        let apiKey = "c5879221935c6f2584c803c06084ccc1"  // Замените на ваш API-ключ
-        let baseURL = "https://api.openweathermap.org/data/2.5/weather"
-        
-        func getWeather(for city: String, completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
-            let parameters: [String: String] = [
-                "q": city,
-                "appid": apiKey,
-                "units": "metric"
-            ]
-            
-            AF.request(baseURL, parameters: parameters).responseDecodable(of: WeatherResponse.self) { response in
-                switch response.result {
-                case .success(let weatherResponse):
-                    completion(.success(weatherResponse))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        }
     }
     
     //Обробка отриманої відповіді
