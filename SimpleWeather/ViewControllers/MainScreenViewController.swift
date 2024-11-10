@@ -20,6 +20,7 @@ class MainScreenViewController: UIViewController {
     var weatherImage: UIImage = UIImage()
     
     let weatherService = WeatherService()
+    let weatherForecastService = WeatherForecastService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,17 @@ class MainScreenViewController: UIViewController {
         fetchWeather(for: city)
         // Добавляем целевое действие для изменения индекса
         segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+        
+        weatherForecastService.fetchFiveDayForecast(for: city, apiKey: apiKey) { [weak self] forecastArray, error in
+                    if let error = error {
+                        print("Ошибка: \(error.localizedDescription)")
+                    } else if let forecastArray = forecastArray {
+                        DispatchQueue.main.async {
+                            //self?.updateChartWithData(forecastArray)
+                            print(forecastArray)
+                        }
+                    }
+                }
         
     }
     

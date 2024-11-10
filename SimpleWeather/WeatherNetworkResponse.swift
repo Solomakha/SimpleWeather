@@ -22,3 +22,9 @@ struct WeatherResponse: Decodable {
         let icon: String
     }
 }
+
+// Определим структуру для хранения данных прогноза
+struct WeatherForecast {
+    let date: String
+    let avgTemp: Double
+}
