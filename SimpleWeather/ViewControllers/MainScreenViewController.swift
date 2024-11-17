@@ -267,15 +267,13 @@ class MainScreenViewController: UIViewController {
         chartDataSet.circleRadius = 6.0              // Размер точек
         chartDataSet.circleHoleRadius = 2.0          // Размер внутреннего круга
         chartDataSet.lineWidth = 3.0                 // Ширина линии
-        //        chartDataSet.drawValuesEnabled = false       // Отключаем отображение значений над точками
         chartDataSet.drawFilledEnabled = false       // Отключаем заполнение под линией
         
         // Включаем отображение значений
         chartDataSet.drawValuesEnabled = true
+        chartDataSet.valueFormatter = BelowPointValueFormatter()
         chartDataSet.valueFont = .systemFont(ofSize: 10)
         chartDataSet.valueTextColor = .black
-        // Настройка пользовательского форматтера для значений (добавляем символ "°")
-        chartDataSet.valueFormatter = DefaultValueFormatter(formatter: NumberFormatter.temperatureFormatter)
         
         let chartData = LineChartData(dataSet: chartDataSet)
         lineChartView.data = chartData
@@ -315,14 +313,4 @@ class MainScreenViewController: UIViewController {
         }
     }
     
-}
-
-extension NumberFormatter {
-    static var temperatureFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 0
-        formatter.positiveSuffix = "°С"
-        return formatter
-    }
 }

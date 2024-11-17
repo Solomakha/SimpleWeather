@@ -20,6 +20,7 @@
 		7C8917A72CE1122000EC4A23 /* WeatherNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8917A62CE1122000EC4A23 /* WeatherNetworkResponse.swift */; };
 		7C8917A92CE114B600EC4A23 /* WeatherNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8917A82CE114B600EC4A23 /* WeatherNetworkService.swift */; };
 		7C8917AD2CE117CC00EC4A23 /* WeatherForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8917AC2CE117CC00EC4A23 /* WeatherForecastService.swift */; };
+		7C902DBC2CEA021600E977EC /* BelowPointValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C902DBB2CEA021600E977EC /* BelowPointValueFormatter.swift */; };
 		7CD401F22CC9421D00BC5995 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD401F12CC9421D00BC5995 /* Alamofire */; };
 		7CD401F42CC9421D00BC5995 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD401F32CC9421D00BC5995 /* AlamofireDynamic */; };
 		7CD401F72CC9582F00BC5995 /* FlagAndCountryCode in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD401F62CC9582F00BC5995 /* FlagAndCountryCode */; };
@@ -60,6 +61,7 @@
 		7C8917A62CE1122000EC4A23 /* WeatherNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNetworkResponse.swift; sourceTree = "<group>"; };
 		7C8917A82CE114B600EC4A23 /* WeatherNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNetworkService.swift; sourceTree = "<group>"; };
 		7C8917AC2CE117CC00EC4A23 /* WeatherForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastService.swift; sourceTree = "<group>"; };
+		7C902DBB2CEA021600E977EC /* BelowPointValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BelowPointValueFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				7C8917A62CE1122000EC4A23 /* WeatherNetworkResponse.swift */,
 				7C8917A82CE114B600EC4A23 /* WeatherNetworkService.swift */,
 				7C8917AC2CE117CC00EC4A23 /* WeatherForecastService.swift */,
+				7C902DBB2CEA021600E977EC /* BelowPointValueFormatter.swift */,
 			);
 			path = SimpleWeather;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				7C4C622F2CA8453100E51B8F /* AppCoordinator.swift in Sources */,
 				7C4C62042CA833F700E51B8F /* SimpleWeather.xcdatamodeld in Sources */,
 				7C8917A92CE114B600EC4A23 /* WeatherNetworkService.swift in Sources */,
+				7C902DBC2CEA021600E977EC /* BelowPointValueFormatter.swift in Sources */,
 				7C4C622D2CA843EA00E51B8F /* Coordinator.swift in Sources */,
 				7C4C61FA2CA833F700E51B8F /* AppDelegate.swift in Sources */,
 				7C4C62312CA8561000E51B8F /* MainScreenViewController.swift in Sources */,
