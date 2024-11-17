@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Charts
+import DGCharts
 
 public let apiKey = "c5879221935c6f2584c803c06084ccc1"  // Замените на ваш API-ключ
 public let baseURL = "https://api.openweathermap.org/data/2.5/"
@@ -21,6 +23,9 @@ class MainScreenViewController: UIViewController {
     
     let weatherService = WeatherService()
     let weatherForecastService = WeatherForecastService()
+    
+    // LineChartView для отображения графика
+    private var lineChartView: LineChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,15 +52,17 @@ class MainScreenViewController: UIViewController {
         segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         
         weatherForecastService.fetchFiveDayForecast(for: city, apiKey: apiKey) { [weak self] forecastArray, error in
-                    if let error = error {
-                        print("Ошибка: \(error.localizedDescription)")
-                    } else if let forecastArray = forecastArray {
-                        DispatchQueue.main.async {
-                            //self?.updateChartWithData(forecastArray)
-                            print(forecastArray)
-                        }
-                    }
+            if let error = error {
+                print("Ошибка: \(error.localizedDescription)")
+            } else if let forecastArray = forecastArray {
+                DispatchQueue.main.async {
+                    self?.updateChartWithData(forecastArray)
                 }
+            }
+        }
+        
+        // Инициализируем и добавляем LineChartView в weatherGraphView
+        setupChartView()
         
     }
     
@@ -101,7 +108,7 @@ class MainScreenViewController: UIViewController {
             segmentedControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             segmentedControl.heightAnchor.constraint(equalToConstant: 40),
             segmentedControl.widthAnchor.constraint(equalToConstant: 350)
-        
+            
         ])
     }
     
@@ -226,18 +233,96 @@ class MainScreenViewController: UIViewController {
         }
     }
     
+    private func setupChartView() {
+        lineChartView = LineChartView()
+        lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        lineChartView.backgroundColor = .clear
+        weatherGraphView.addSubview(lineChartView)
+        
+        NSLayoutConstraint.activate([
+            lineChartView.leadingAnchor.constraint(equalTo: weatherGraphView.leadingAnchor, constant: 10),
+            lineChartView.trailingAnchor.constraint(equalTo: weatherGraphView.trailingAnchor, constant: -10),
+            lineChartView.topAnchor.constraint(equalTo: weatherGraphView.topAnchor, constant: 10),
+            lineChartView.bottomAnchor.constraint(equalTo: weatherGraphView.bottomAnchor, constant: -10)
+        ])
+    }
+    
+    // Метод для обновления данных на графике
+    private func updateChartWithData(_ forecastArray: [WeatherForecast]) {
+        var dataEntries: [ChartDataEntry] = []
+        
+        // Создание данных для графика
+        for (index, forecast) in forecastArray.enumerated() {
+            let dataEntry = ChartDataEntry(x: Double(index), y: forecast.avgTemp)
+            dataEntries.append(dataEntry)
+        }
+        
+        // Настройка данных для графика
+        let chartDataSet = LineChartDataSet(entries: dataEntries, label: "")
+        
+        // Настройка отображения линии и точек
+        chartDataSet.colors = [.black]              // Цвет линии
+        chartDataSet.circleColors = [.black]         // Цвет границ точек
+        chartDataSet.circleHoleColor = .black        // Цвет центра точек (заливка)
+        chartDataSet.circleRadius = 6.0              // Размер точек
+        chartDataSet.circleHoleRadius = 2.0          // Размер внутреннего круга
+        chartDataSet.lineWidth = 3.0                 // Ширина линии
+        //        chartDataSet.drawValuesEnabled = false       // Отключаем отображение значений над точками
+        chartDataSet.drawFilledEnabled = false       // Отключаем заполнение под линией
+        
+        // Включаем отображение значений
+        chartDataSet.drawValuesEnabled = true
+        chartDataSet.valueFont = .systemFont(ofSize: 10)
+        chartDataSet.valueTextColor = .black
+        // Настройка пользовательского форматтера для значений (добавляем символ "°")
+        chartDataSet.valueFormatter = DefaultValueFormatter(formatter: NumberFormatter.temperatureFormatter)
+        
+        let chartData = LineChartData(dataSet: chartDataSet)
+        lineChartView.data = chartData
+        
+        // Настройка пользовательского форматтера для оси X
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: forecastArray.map { _ in "" })
+        lineChartView.xAxis.granularity = 1
+        lineChartView.xAxis.labelPosition = .bottom
+        lineChartView.xAxis.drawGridLinesEnabled = false // Убираем линии сетки
+        lineChartView.xAxis.drawAxisLineEnabled = false // Убираем линию оси X
+        lineChartView.xAxis.labelFont = .systemFont(ofSize: 12)
+        lineChartView.xAxis.labelTextColor = .black
+        
+        // Отключение оси Y и других лишних элементов
+        lineChartView.leftAxis.enabled = false        // Полностью отключаем левую ось Y
+        lineChartView.rightAxis.enabled = false       // Полностью отключаем правую ось Y
+        
+        // Отключение легенды и описания
+        lineChartView.legend.enabled = false
+        lineChartView.chartDescription.enabled = false
+        
+        // Анимация
+        lineChartView.animate(xAxisDuration: 1.0) // Плавное появление графика
+    }
+    
     //Функція для зміни стану weatherGraphView
     @objc func indexChanged(_ sender: UISegmentedControl) {
-            switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                weatherGraphView.backgroundColor = .black
-            case 1:
-                weatherGraphView.backgroundColor = .blue
-            case 2:
-                weatherGraphView.backgroundColor = .green
-            default:
-                weatherGraphView.backgroundColor = .gray
-            }
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            weatherGraphView.backgroundColor = .black
+        case 1:
+            weatherGraphView.backgroundColor = .blue
+        case 2:
+            weatherGraphView.backgroundColor = .green
+        default:
+            weatherGraphView.backgroundColor = .clear
         }
+    }
     
+}
+
+extension NumberFormatter {
+    static var temperatureFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        formatter.positiveSuffix = "°С"
+        return formatter
+    }
 }
